@@ -5,8 +5,8 @@ works with tomcat9 & jre11. see https://hub.docker.com/_/tomcat/
 ## requirement
 
 ```
-$(aws ecr get-login --no-include-email)
-docker pull 316054198708.dkr.ecr.us-east-1.amazonaws.com/ebx:5.8.1.1067-0027
+docker login
+docker pull mickaelgermemont/ebx:5.8.1.1067-0027
 ```
 
 ## Docker build
