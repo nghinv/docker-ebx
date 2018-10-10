@@ -32,11 +32,8 @@ COPY --from=mickaelgermemont/ebx:5.8.1.1067-0027 /data/ebx/ebx.software/webapps/
 ###
 ### PROJECT
 
-COPY ebx.properties ${EBX_HOME}/ebx.properties
-ENV EBX_OPTS="-Debx.home=${EBX_HOME} -Debx.properties=${EBX_HOME}/ebx.properties"
-
-# COPY dev-local/bin/*.jar $CATALINA_HOME/lib/
-
+COPY ebx.properties /data/app/ebx.properties
+ENV EBX_OPTS="-Debx.home=${EBX_HOME} -Debx.properties=/data/app/ebx.properties"
 
 ###
 ### startup parameters
