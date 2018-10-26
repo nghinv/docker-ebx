@@ -1,8 +1,8 @@
 FROM tomcat:9.0.12-jre11
 
 ### commands
-# docker build -t ebx:5.8.1-tomcat9.0.12-jre11 .
-# docker run --rm -p 9090:8080 --mount type=volume,src=ebx1,dst=/data/app/ebx -e "CATALINA_OPTS=-DebxLicense=$EBXLICENSE" --name ebx1 ebx:5.8.1-tomcat9.0.12-jre11
+# docker build -t ebx:5.9.0-tomcat9.0.12-jre11 .
+# docker run --rm -p 9090:8080 --mount type=volume,src=ebx,dst=/data/app/ebx -e "CATALINA_OPTS=-DebxLicense=$EBXLICENSE" --name ebx1 ebx:5.9.0-tomcat9.0.12-jre11
 
 ENV EBX_HOME /data/app/ebx
 RUN mkdir -p ${EBX_HOME}
@@ -21,13 +21,12 @@ COPY tomcat_conf/context.xml ${CATALINA_HOME}/conf/
 COPY tomcat_conf/logging.properties ${CATALINA_HOME}/conf/
 COPY tomcat_conf/server.xml $CATALINA_HOME/conf/
 COPY tomcat_conf/catalina.properties $CATALINA_HOME/conf/
-
 COPY tomcat_conf/context/ebx.xml ${CATALINA_HOME}/conf/Catalina/localhost/
 
-COPY --from=mickaelgermemont/ebx:5.8.1.1067-0027 /data/ebx/libs/*.jar $CATALINA_HOME/lib/
-COPY --from=mickaelgermemont/ebx:5.8.1.1067-0027 /data/ebx/ebx.software/lib/ebx.jar $CATALINA_HOME/lib/
-COPY --from=mickaelgermemont/ebx:5.8.1.1067-0027 /data/ebx/ebx.software/lib/lib-h2/h2-1.3.170.jar $CATALINA_HOME/lib/
-COPY --from=mickaelgermemont/ebx:5.8.1.1067-0027 /data/ebx/ebx.software/webapps/wars-packaging/*.war $CATALINA_HOME/webapps/
+COPY --from=mickaelgermemont/ebx:5.9.0.1098 /data/ebx/libs/*.jar $CATALINA_HOME/lib/
+COPY --from=mickaelgermemont/ebx:5.9.0.1098 /data/ebx/ebx.software/lib/*.jar $CATALINA_HOME/lib/
+COPY --from=mickaelgermemont/ebx:5.9.0.1098 /data/ebx/ebx.software/lib/lib-h2/*.jar $CATALINA_HOME/lib/
+COPY --from=mickaelgermemont/ebx:5.9.0.1098 /data/ebx/ebx.software/webapps/wars-packaging/*.war $CATALINA_HOME/webapps/
 
 ###
 ### PROJECT
